@@ -17,6 +17,7 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    void setStatusBar();
 };
 
 #endif // MAINWINDOW_H
