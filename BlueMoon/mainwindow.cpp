@@ -1,6 +1,15 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+void MainWindow::setStatusBar()
+{
+
+#ifndef QT_NO_STATUSBAR
+    (void)statusBar();
+#endif
+
+}
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -8,14 +17,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     setStatusBar();
     statusBar()->showMessage("test status");
-}
 
-void MainWindow::setStatusBar()
-{
-
-#ifndef QT_NO_STATUSBAR
-    ( void )statusBar();
-#endif
 
 }
 
