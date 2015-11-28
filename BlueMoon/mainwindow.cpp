@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "utils.h"
 
 void MainWindow::setStatusBar()
 {
@@ -16,9 +17,10 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     setStatusBar();
-    statusBar()->showMessage("test status");
 
-
+    //test
+    const char *v = "pwd";
+    statusBar()->showMessage(QString::fromStdString(exec(v)));
 }
 
 MainWindow::~MainWindow()
