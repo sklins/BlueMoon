@@ -18,9 +18,15 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     setStatusBar();
 
-    //test
-    const char *v = "pwd";
-    statusBar()->showMessage(QString::fromStdString(exec(v)));
+    //test of an old method
+    //const char *v = "pwd";
+    //statusBar()->showMessage(QString::fromStdString(exec(v)));
+
+    //test of a new method running scripts
+    QString script = QString("#! /usr/bin/env bash\n") +
+                         QString("pwd\n") +
+                         QString("EOF\n");
+    statusBar()->showMessage(runScr(script));
 }
 
 MainWindow::~MainWindow()
