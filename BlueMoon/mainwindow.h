@@ -16,6 +16,23 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+    
+    //createTransfer(DeviceInfo);
+    //createPassword
+    
+    //InfoAboutDevice?
+    
+    //TurnOnOffBluetooth    
+    //VisibleIbvisible 
+    
+    //CreateTrailIcon
+    //TrailIconWindow OnOff
+    
+    //createPAN
+    
+    //loadLocalList
+    //addtoLocalList
+    //deleteFromLocalList
 
 private slots:
     void startScan();
