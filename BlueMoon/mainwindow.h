@@ -17,20 +17,20 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     
-    //createTransfer(DeviceInfo);
+    //createTransfer(DeviceInfo); - Sonya
     //createPassword
     
     //InfoAboutDevice?
     
-    //TurnOnOffBluetooth    
+    //TurnOnOffBluetooth
     //VisibleIbvisible 
     
-    //CreateTrailIcon
-    //TrailIconWindow OnOff
+    //CreateTrayIcon - Tina
+    //TraylIconWindow OnOff
     
     //createPAN
     
-    //loadLocalList
+    //loadLocalList - Elina
     //addtoLocalList
     //deleteFromLocalList
 
