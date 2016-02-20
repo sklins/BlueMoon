@@ -7,6 +7,7 @@
 #include <QtWidgets>
 
 #include "pindialog.h"
+#include "trusteddevicelist.h"
 
 class RemoteSelector
     : public QWidget
@@ -19,6 +20,13 @@ public:
     void startDiscovery(const QBluetoothUuid& uuid);
     QBluetoothServiceInfo service() const;
 
+    /*
+     * Devicelist settings
+     */
+    void showtrustedDeviceList(trusteddevicelist tdl);
+    void addToTrustList(trusteddevicelist tdl,const QBluetoothServiceInfo& serviceInfo);
+    void deleteFromTrustList(trusteddevicelist tdl,const QBluetoothServiceInfo& serviceInfo);
+
 private:
     QScopedPointer<Ui::RemoteSelector> ui;
     QScopedPointer<QBluetoothLocalDevice> localDevice_;
@@ -30,6 +38,8 @@ private:
     bool pairingErrorFlag_;
 
     QString addressToName(const QBluetoothAddress& address);
+
+    trusteddevicelist trustedDevicelist;
 
 public Q_SLOTS:
     void startDiscovery();
@@ -50,4 +60,6 @@ private slots:
 
     void on_remoteDevices_cellClicked(int row, int column);
     void on_remoteDevices_itemChanged(QTableWidgetItem* item);
+
+
 };

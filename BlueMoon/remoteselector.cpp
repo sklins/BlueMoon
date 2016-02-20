@@ -9,6 +9,17 @@ RemoteSelector::RemoteSelector(QWidget* parent)
     ui.reset(new Ui::RemoteSelector);
     ui->setupUi(this);
 
+    //Stuff with local trusted deviceList
+    trustedDevicelist =  trusteddevicelist();
+    //TODO:check path
+    trustedDevicelist.setFileName(QString("list.dat"));
+    QString dir=QDir::currentPath();
+    //dir.lastIndexOf('/');
+    trustedDevicelist.setFileDirectory(dir);// /home/linke/Desktop/BlueMoon/"));
+
+    //trustedDevicelist.writeToTrustedDeviceList();
+    trustedDevicelist.readTrustedDeviceList();
+
     localDevice_.reset(new QBluetoothLocalDevice);
     QBluetoothAddress adapterAddress = localDevice_->address();
     discoveryAgent_.reset(new QBluetoothServiceDiscoveryAgent(adapterAddress));
@@ -33,6 +44,15 @@ RemoteSelector::RemoteSelector(QWidget* parent)
 
     ui->remoteDevices->clearContents();
     ui->remoteDevices->setRowCount(0);
+
+    //QPushButton* pButton = new QPushutton("click_on",MyTable);
+
+    //MyTable->setCellWidget(Rownum,ColNum,pButton);
+    //connect(pButton, SIGNAL(clicked()), &ButtonSignalMapper, SLOT(map()));
+    //ButtonSignalMapper.setMapping(pButton, RowNum);
+    //connect(&ButtonSignalMapper, SIGNAL(mapped(int)), this, SLOT(CellButtonClicked(int)));
+
+    showtrustedDeviceList(trustedDevicelist);
 
     connect(ui->sendFilesButton, &QPushButton::clicked, this, &RemoteSelector::sendFileButton_clicked);
 }
@@ -274,4 +294,30 @@ void RemoteSelector::on_remoteDevices_itemChanged(QTableWidgetItem* item) {
 void RemoteSelector::sendFileButton_clicked() {
     Progress* p = new Progress(0, service_);
     p->show();
+}
+
+void RemoteSelector::showtrustedDeviceList(trusteddevicelist tdl)
+{
+
+    QVector<QString> trustedList=tdl.getTrustedDevices();
+    QTableWidgetItem *item;
+
+    for (int i = 0; i < trustedList.size(); ++i)
+    {
+        int row = ui->remoteDevices->rowCount();
+        ui->remoteDevices->insertRow(row);
+        item=new QTableWidgetItem(trustedList[i]);
+        ui->remoteDevices->setItem(i,1, item);
+    }
+}
+
+// Delete after?!
+void RemoteSelector::addToTrustList(trusteddevicelist tdl,const QBluetoothServiceInfo& serviceInfo)
+{
+    //tdl.addToTrustList(serviceInfo);
+
+}
+void RemoteSelector::deleteFromTrustList(trusteddevicelist tdl,const QBluetoothServiceInfo& serviceInfo)
+{
+    //tdl.deleteFromTrustList(serviceInfo);
 }
