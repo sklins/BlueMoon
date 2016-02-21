@@ -55,6 +55,11 @@ RemoteSelector::RemoteSelector(QWidget* parent)
     showtrustedDeviceList(trustedDevicelist);
 
     connect(ui->sendFilesButton, &QPushButton::clicked, this, &RemoteSelector::sendFileButton_clicked);
+
+    createActions();
+    createTrayIcon();
+    connect(trayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(iconActivated(QSystemTrayIcon::ActivationReason)));
+    trayIcon->show();
 }
 
 void RemoteSelector::startDiscovery(const QBluetoothUuid& uuid) {
@@ -320,4 +325,76 @@ void RemoteSelector::addToTrustList(trusteddevicelist tdl,const QBluetoothServic
 void RemoteSelector::deleteFromTrustList(trusteddevicelist tdl,const QBluetoothServiceInfo& serviceInfo)
 {
     //tdl.deleteFromTrustList(serviceInfo);
+}
+
+
+
+// Tray Icon creating.
+// Overriding the virtual function
+void RemoteSelector::changeEvent(QEvent *event)
+{
+    QWidget::changeEvent(event);
+    if(event->type() == QEvent::WindowStateChange)
+        if(isMinimized())
+            this->hide();
+}
+
+void RemoteSelector::createActions()
+{
+    minimizeAction = new QAction(tr("Minimize"), this);
+    connect(minimizeAction, SIGNAL(triggered()), this, SLOT(hide()));
+
+    maximizeAction = new QAction(tr("Maximize"), this);
+    connect(maximizeAction, SIGNAL(triggered()), this, SLOT(showMaximized()));
+
+    bluetoothOnAction = new QAction(tr("Bluetooth ON"), this);
+    connect(bluetoothOnAction, SIGNAL(triggered()), this, SLOT(bluetoothOn()));
+
+    bluetoothOffAction = new QAction(tr("Bluetooth OFF"), this);
+    connect(bluetoothOffAction, SIGNAL(triggered()), this, SLOT(bluetoothOff()));
+
+    quitAction = new QAction(tr("Quit"), this);
+    connect(quitAction, SIGNAL(triggered()), qApp, SLOT(quit()));
+}
+
+void RemoteSelector::createTrayIcon()
+{
+    trayIconMenu = new QMenu(this);
+    trayIconMenu->addAction(bluetoothOnAction);
+    trayIconMenu->addAction(bluetoothOffAction);
+    trayIconMenu->addSeparator();
+    trayIconMenu->addAction(minimizeAction);
+    trayIconMenu->addAction(maximizeAction);
+    trayIconMenu->addSeparator();
+    trayIconMenu->addAction(quitAction);
+
+    trayIcon = new QSystemTrayIcon(this);
+    trayIcon->setContextMenu(trayIconMenu);
+    // Or :/icons/bluetooth.svg
+    trayIcon->setIcon(QIcon("bluetooth.svg"));
+}
+
+void RemoteSelector::iconActivated(QSystemTrayIcon::ActivationReason reason)
+{
+    switch (reason) {
+    case QSystemTrayIcon::Trigger:
+    case QSystemTrayIcon::DoubleClick:
+    case QSystemTrayIcon::MiddleClick:
+        showNormal();
+    default:
+        ;
+    }
+}
+
+void RemoteSelector::bluetoothOn()
+{
+    this->showNormal();
+    //localDevice_.data()->powerOn();
+
+}
+
+void RemoteSelector::bluetoothOff()
+{
+    this->hide();
+    //localDevice_.data()->setHostMode(QBluetoothLocalDevice::HostPoweredOff);
 }
