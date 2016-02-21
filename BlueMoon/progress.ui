@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>File Transfer</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../icons/scalable_bluemoon.svg</normaloff>../icons/scalable_bluemoon.svg</iconset>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <layout class="QGridLayout" name="gridLayout">
