@@ -2,6 +2,7 @@ TEMPLATE = app
 TARGET = blue_moon
 
 QT = core bluetooth widgets
+lessThan(QT_MAJOR_VERSION, 5): error("qt version shouldn't be less than 5")
 
 SOURCES = \
     main.cpp \
