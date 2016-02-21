@@ -27,6 +27,9 @@ public:
     void addToTrustList(trusteddevicelist tdl,const QBluetoothServiceInfo& serviceInfo);
     void deleteFromTrustList(trusteddevicelist tdl,const QBluetoothServiceInfo& serviceInfo);
 
+
+    void changeEvent(QEvent *event);
+
 private:
     QScopedPointer<Ui::RemoteSelector> ui;
     QScopedPointer<QBluetoothLocalDevice> localDevice_;
@@ -40,6 +43,19 @@ private:
     QString addressToName(const QBluetoothAddress& address);
 
     trusteddevicelist trustedDevicelist;
+
+    // Tray Icon
+    void createActions();
+    void createTrayIcon();
+
+    QAction *minimizeAction;
+    QAction *maximizeAction;
+    QAction *bluetoothOnAction;
+    QAction *bluetoothOffAction;
+    QAction *quitAction;
+
+    QSystemTrayIcon *trayIcon;
+    QMenu *trayIconMenu;
 
 public Q_SLOTS:
     void startDiscovery();
@@ -61,5 +77,9 @@ private slots:
     void on_remoteDevices_cellClicked(int row, int column);
     void on_remoteDevices_itemChanged(QTableWidgetItem* item);
 
+    //
+    void iconActivated(QSystemTrayIcon::ActivationReason reason);
+    void bluetoothOn();
+    void bluetoothOff();
 
 };
