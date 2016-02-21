@@ -7,12 +7,14 @@ SOURCES = \
     main.cpp \
     remoteselector.cpp \
     progress.cpp \
-    pindialog.cpp
+    pindialog.cpp \
+    trusteddevicelist.cpp
 
 HEADERS = \
     remoteselector.h \
     progress.h \
-    pindialog.h
+    pindialog.h \
+    trusteddevicelist.h
 
 FORMS = \
     remoteselector.ui \
