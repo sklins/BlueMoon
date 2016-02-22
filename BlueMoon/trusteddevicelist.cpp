@@ -64,10 +64,18 @@ QVector<QString> trusteddevicelist::getTrustedDevices()
 {
     return trustedDevices;
 }
+
 void trusteddevicelist::setTrusteddevices(QVector<QString> tD)
 {
     trustedDevices=tD;
 }
+
+//TODO: Elina
+bool trusteddevicelist::isTrusted(QString macAddress)
+{
+    return false;
+}
+
 /*void trusteddevicelist::addToTrustList(const QBluetoothServiceInfo& serviceInfo)
 {
     //QString device = serviceInfo.device().name().toString();

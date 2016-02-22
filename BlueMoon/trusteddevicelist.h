@@ -27,6 +27,8 @@ public:
     void addToTrustList(const QBluetoothServiceInfo& serviceInfo);
     void deleteFromTrustList(const QBluetoothServiceInfo& serviceInfo);
 
+    bool isTrusted(QString macAddress);
+
 public:
     void readTrustedDeviceList();
     void writeToTrustedDeviceList();
