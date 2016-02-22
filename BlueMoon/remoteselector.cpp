@@ -118,8 +118,8 @@ void RemoteSelector::serviceDiscovered(const QBluetoothServiceInfo& serviceInfo)
                 serviceInfo.device().address().toString(),
                 serviceInfo.device().name(),
                 "TO DO",
-                serviceInfo.device().isValid(),
-                serviceInfo.device().deviceUuid());
+                QString::number(serviceInfo.device().isValid()),
+                serviceInfo.device().deviceUuid().toString());
     int row = ui->remoteDevices->rowCount();
     ui->remoteDevices->insertRow(row);
     QTableWidgetItem *item = new QTableWidgetItem(serviceInfo.device().address().toString());
