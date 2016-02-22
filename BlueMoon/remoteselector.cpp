@@ -114,7 +114,12 @@ void RemoteSelector::serviceDiscovered(const QBluetoothServiceInfo& serviceInfo)
         }
     }
 
-    QString tooltip = QString("%1\n%2").arg(serviceInfo.device().address().toString(), serviceInfo.device().name());
+    QString tooltip = QString("address: %1\nname: %2\nis trusted: %3\nis valid: %4\nuuid: %5").arg(
+                serviceInfo.device().address().toString(),
+                serviceInfo.device().name(),
+                "TO DO",
+                serviceInfo.device().isValid(),
+                serviceInfo.device().deviceUuid());
     int row = ui->remoteDevices->rowCount();
     ui->remoteDevices->insertRow(row);
     QTableWidgetItem *item = new QTableWidgetItem(serviceInfo.device().address().toString());
