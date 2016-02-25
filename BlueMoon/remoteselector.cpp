@@ -273,11 +273,15 @@ void RemoteSelector::on_remoteDevices_cellClicked(int row, int column) {
     Q_UNUSED(column);
     service_ = discoveredServices_.value(row);
     QBluetoothServiceInfo service;
+    QTableWidgetItem *item;
     if (column==4)
     {
         if(ui->remoteDevices->item(row, 4)->checkState() == Qt::Checked)
         {
-            ui->remoteDevices->item(row, 4)->setCheckState(Qt::Unchecked);
+            item=new QTableWidgetItem();
+            item->setCheckState(Qt::Unchecked);
+            ui->remoteDevices->setItem(row,4, item);
+
             QString address= ui->remoteDevices->item(row, 0)->text();
             for (int i = 0; i < discoveredServices_.count(); i++)
             {
@@ -290,6 +294,10 @@ void RemoteSelector::on_remoteDevices_cellClicked(int row, int column) {
         }
         else
         {
+            item=new QTableWidgetItem();
+            item->setCheckState(Qt::Checked);
+            ui->remoteDevices->setItem(row,4, item);
+
             ui->remoteDevices->item(row, 4)->setCheckState(Qt::Checked);
             QString address=  ui->remoteDevices->item(row, 0)->text();
             for (int i = 0; i < discoveredServices_.count(); i++)
@@ -350,14 +358,22 @@ void RemoteSelector::showtrustedDeviceList(trusteddevicelist tdl)
     {
         int row = ui->remoteDevices->rowCount();
         ui->remoteDevices->insertRow(row);
-        item=new QTableWidgetItem(trustedList[i][3]);
-        ui->remoteDevices->setItem(i,0, item);
         item=new QTableWidgetItem(trustedList[i][2]);
-        ui->remoteDevices->setItem(i,1, item);
+        ui->remoteDevices->setItem(i,0, item);
+
         item=new QTableWidgetItem(trustedList[i][1]);
-        ui->remoteDevices->setItem(i,2, item);
+        ui->remoteDevices->setItem(i,1, item);
+
         item=new QTableWidgetItem(trustedList[i][0]);
+        ui->remoteDevices->setItem(i,2, item);
+
+        item=new QTableWidgetItem();
+        item->setCheckState(Qt::Unchecked);
         ui->remoteDevices->setItem(i,3, item);
+
+        item=new QTableWidgetItem();
+        item->setCheckState(Qt::Checked);
+        ui->remoteDevices->setItem(i,4, item);
     }
 }
 
