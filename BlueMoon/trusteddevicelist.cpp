@@ -74,7 +74,16 @@ void trusteddevicelist::setTrusteddevices(QVector<QVector<QString> > tD)
 //TODO: Elina
 bool trusteddevicelist::isTrusted(QString macAddress)
 {
-    return false;
+    bool isTrusted=false;
+    for(int i=0;i<trustedDevices.length();i++)
+    {
+        if(trustedDevices[i][2]==macAddress)
+        {
+            isTrusted=true;
+            break;
+        }
+    }
+    return isTrusted;
 }
 
 void trusteddevicelist::addToTrustList(const QBluetoothServiceInfo& serviceInfo)

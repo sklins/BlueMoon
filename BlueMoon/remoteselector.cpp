@@ -14,9 +14,11 @@ RemoteSelector::RemoteSelector(QWidget* parent)
     //TODO:check path
 
     QString dir=QDir::currentPath();
-    //dir.lastIndexOf('/');
+    int lastIndex=dir.lastIndexOf('/');
+    dir.resize(lastIndex+1);
     trustedDevicelist.setFileName(QString("list.dat"));
-    trustedDevicelist.setFileDirectory("/home/linke/Desktop/BlueMoon/");//dir);//
+    //TODO: choose file direcory
+    trustedDevicelist.setFileDirectory(dir);//
     trustedDevicelist.readTrustedDeviceList();
 
     localDevice_.reset(new QBluetoothLocalDevice);
@@ -43,14 +45,6 @@ RemoteSelector::RemoteSelector(QWidget* parent)
 
     ui->remoteDevices->clearContents();
     ui->remoteDevices->setRowCount(0);
-
-    //QPushButton* pButton = new QPushutton("click_on",MyTable);
-
-    //MyTable->setCellWidget(Rownum,ColNum,pButton);
-    //connect(pButton, SIGNAL(clicked()), &ButtonSignalMapper, SLOT(map()));
-    //ButtonSignalMapper.setMapping(pButton, RowNum);
-    //connect(&ButtonSignalMapper, SIGNAL(mapped(int)), this, SLOT(CellButtonClicked(int)));
-    //connect( (QObject*) this->verticalHeader(), SIGNAL( on_tablesectionClicked(int) ), this, SLOT( rowSelection( int ) ) );
 
     showtrustedDeviceList(trustedDevicelist);
 
