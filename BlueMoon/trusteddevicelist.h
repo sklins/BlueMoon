@@ -12,7 +12,7 @@ public:
 private:
     QString fileName;
     QString fileDirectory;
-    QVector<QString> trustedDevices;
+    QVector<QVector<QString> > trustedDevices;
 
 public:
     void setFileName(QString filename);
@@ -21,8 +21,8 @@ public:
     void setFileDirectory(QString filedirectory);
     QString getFileDirectory();
 
-    void setTrusteddevices(QVector<QString> tD);
-    QVector<QString> getTrustedDevices();
+    void setTrusteddevices(QVector<QVector<QString> > tD);
+    QVector<QVector<QString> > getTrustedDevices();
 
     void addToTrustList(const QBluetoothServiceInfo& serviceInfo);
     void deleteFromTrustList(const QBluetoothServiceInfo& serviceInfo);

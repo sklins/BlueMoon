@@ -59,7 +59,8 @@ private:
 
 public Q_SLOTS:
     void startDiscovery();
-
+signals:
+    //void tableSectionChecked();
 private slots:
     void serviceDiscovered(const QBluetoothServiceInfo &serviceInfo);
     void discoveryFinished();
@@ -76,6 +77,8 @@ private slots:
 
     void on_remoteDevices_cellClicked(int row, int column);
     void on_remoteDevices_itemChanged(QTableWidgetItem* item);
+
+    //void rowSelection
 
     //
     void iconActivated(QSystemTrayIcon::ActivationReason reason);

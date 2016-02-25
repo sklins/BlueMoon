@@ -3,6 +3,7 @@
 #include <QFile>
 #include <QIODevice>
 #include <QBluetoothServiceInfo>
+#include <QBluetoothDeviceInfo>
 
 trusteddevicelist::trusteddevicelist()
 {
@@ -19,9 +20,9 @@ void trusteddevicelist::readTrustedDeviceList()
     QFile file(filename);
     if (!file.open(QIODevice::ReadOnly))
             return;
-    QVector<QString> tdlist=trusteddevicelist::getTrustedDevices();
+    QVector<QVector<QString> > tdlist;
     QDataStream in(&file);
-    QString deviceInfo;
+    QVector<QString> deviceInfo;
     while(!in.atEnd())
     {
         in>>deviceInfo;
@@ -40,8 +41,8 @@ void trusteddevicelist::writeToTrustedDeviceList()
     if (!file.open(QIODevice::WriteOnly))
             return;
     QDataStream out(&file);
-    out<<QString("HTC DESIRE 616");
-    out<<QString("HP PAVILION g1349");
+    for (int i=0;i<trusteddevicelist::trustedDevices.length();i++)
+        out<<trusteddevicelist::trustedDevices[i];
     file.close();
 }
 
@@ -60,12 +61,12 @@ void trusteddevicelist::setFileName(QString filename){
     fileName=filename;
 }
 
-QVector<QString> trusteddevicelist::getTrustedDevices()
+QVector<QVector<QString> > trusteddevicelist::getTrustedDevices()
 {
     return trustedDevices;
 }
 
-void trusteddevicelist::setTrusteddevices(QVector<QString> tD)
+void trusteddevicelist::setTrusteddevices(QVector<QVector<QString> > tD)
 {
     trustedDevices=tD;
 }
@@ -76,12 +77,23 @@ bool trusteddevicelist::isTrusted(QString macAddress)
     return false;
 }
 
-/*void trusteddevicelist::addToTrustList(const QBluetoothServiceInfo& serviceInfo)
+void trusteddevicelist::addToTrustList(const QBluetoothServiceInfo& serviceInfo)
 {
-    //QString device = serviceInfo.device().name().toString();
-    //device+=serviceInfo.serviceName().toString();
-    //device+=serviceInfo.address().toString();
-    //trustedDevices.prepend(deviceInfo);
+    QVector<QString> device;
+    QBluetoothDeviceInfo deviceInfo=serviceInfo.device();
+    device.prepend(deviceInfo.address().toString());
+    device.prepend(deviceInfo.name());
+    device.prepend(deviceInfo.isValid() ? "yes" : "no");
+    device.prepend(serviceInfo.serviceDescription());
+    trustedDevices.prepend(device);
 }
 void trusteddevicelist::deleteFromTrustList(const QBluetoothServiceInfo& serviceInfo)
-{}*/
+{
+    QString address=serviceInfo.device().address().toString();
+    for(int i=0;i<trustedDevices.length();i++)
+    {
+        if(trustedDevices[i][3]==address)
+            trustedDevices.remove(i);
+    }
+
+}
