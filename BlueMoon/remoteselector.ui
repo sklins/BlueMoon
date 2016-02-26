@@ -20,7 +20,7 @@
    <iconset>
     <normaloff>../icons/scalable_bluemoon.svg</normaloff>../icons/scalable_bluemoon.svg</iconset>
   </property>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -232,6 +232,19 @@
    </property>
    <property name="text">
     <string>Visibile</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>690</x>
+     <y>10</y>
+     <width>67</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
    </property>
   </widget>
  </widget>

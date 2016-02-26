@@ -12,7 +12,6 @@ RemoteSelector::RemoteSelector(QWidget* parent)
     //Stuff with local trusted deviceList
     trustedDevicelist =  trusteddevicelist();
     //TODO:check path
-
     QString dir=QDir::currentPath();
     int lastIndex=dir.lastIndexOf('/');
     dir.resize(lastIndex+1);
@@ -51,6 +50,12 @@ RemoteSelector::RemoteSelector(QWidget* parent)
     connect(ui->checkBox_2,&QCheckBox::clicked, this, &RemoteSelector::visibilityOnOff);
 
     connect(ui->sendFilesButton, &QPushButton::clicked, this, &RemoteSelector::sendFileButton_clicked);
+
+    //local name
+    QString labelText = "<b>";
+    labelText .append(localDevice_.data()->name());
+    labelText .append("</b>");
+    ui->label->setText(labelText);
 
     createActions();
     createTrayIcon();
