@@ -17,6 +17,9 @@ class RemoteSelector
 public:
     explicit RemoteSelector(QWidget* = 0);
 
+    bool turnOnOff=false;
+    bool visibility=false;
+
     void startDiscovery(const QBluetoothUuid& uuid);
     QBluetoothServiceInfo service() const;
 
@@ -24,9 +27,6 @@ public:
      * Devicelist settings
      */
     void showtrustedDeviceList(trusteddevicelist tdl);
-    void addToTrustList(trusteddevicelist tdl,const QBluetoothServiceInfo& serviceInfo);
-    void deleteFromTrustList(trusteddevicelist tdl,const QBluetoothServiceInfo& serviceInfo);
-
 
     void changeEvent(QEvent *event);
 
@@ -61,6 +61,8 @@ public Q_SLOTS:
     void startDiscovery();
 signals:
     //void tableSectionChecked();
+
+
 private slots:
     void serviceDiscovered(const QBluetoothServiceInfo &serviceInfo);
     void discoveryFinished();
@@ -79,7 +81,9 @@ private slots:
     void on_remoteDevices_itemChanged(QTableWidgetItem* item);
 
     //void rowSelection
-
+    void changeHostMode();
+    void powerOnOff();
+    void visibilityOnOff();
     //
     void iconActivated(QSystemTrayIcon::ActivationReason reason);
     void bluetoothOn();

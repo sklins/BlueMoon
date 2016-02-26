@@ -38,7 +38,8 @@ void trusteddevicelist::writeToTrustedDeviceList()
 
     filename = filedir+filename;
     QFile file(filename);
-    if (!file.open(QIODevice::WriteOnly))
+    //QDataStream in(&file, QIODevice::Truncate);
+    if (!file.open(QIODevice::WriteOnly | QFile::Truncate))
             return;
     QDataStream out(&file);
     for (int i=0;i<trusteddevicelist::trustedDevices.length();i++)

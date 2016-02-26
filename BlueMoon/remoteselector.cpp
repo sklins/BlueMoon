@@ -47,6 +47,8 @@ RemoteSelector::RemoteSelector(QWidget* parent)
     ui->remoteDevices->setRowCount(0);
 
     showtrustedDeviceList(trustedDevicelist);
+    connect(ui->checkBox, &QCheckBox::clicked, this, &RemoteSelector::powerOnOff);
+    connect(ui->checkBox_2,&QCheckBox::clicked, this, &RemoteSelector::visibilityOnOff);
 
     connect(ui->sendFilesButton, &QPushButton::clicked, this, &RemoteSelector::sendFileButton_clicked);
 
@@ -371,18 +373,6 @@ void RemoteSelector::showtrustedDeviceList(trusteddevicelist tdl)
     }
 }
 
-// Delete after?!
-void RemoteSelector::addToTrustList(trusteddevicelist tdl,const QBluetoothServiceInfo& serviceInfo)
-{
-    //tdl.addToTrustList(serviceInfo);
-
-}
-void RemoteSelector::deleteFromTrustList(trusteddevicelist tdl,const QBluetoothServiceInfo& serviceInfo)
-{
-    //tdl.deleteFromTrustList(serviceInfo);
-}
-
-
 
 // Tray Icon creating.
 // Overriding the virtual function
@@ -428,6 +418,19 @@ void RemoteSelector::createTrayIcon()
     // Or :/icons/bluetooth.svg
     trayIcon->setIcon(QIcon("bluetooth.svg"));
 }
+void RemoteSelector::changeHostMode()
+{
+    if (RemoteSelector::turnOnOff & RemoteSelector::visibility)
+        localDevice_.data()->setHostMode(QBluetoothLocalDevice::HostDiscoverable);
+    if (RemoteSelector::turnOnOff & !RemoteSelector::visibility)
+        localDevice_.data()->setHostMode(QBluetoothLocalDevice::HostConnectable);
+
+    if (!RemoteSelector::turnOnOff & RemoteSelector::visibility)
+        localDevice_.data()->setHostMode(QBluetoothLocalDevice::HostDiscoverableLimitedInquiry);
+    if (!RemoteSelector::turnOnOff & !RemoteSelector::visibility)
+        localDevice_.data()->setHostMode(QBluetoothLocalDevice::HostPoweredOff);
+
+}
 
 void RemoteSelector::iconActivated(QSystemTrayIcon::ActivationReason reason)
 {
@@ -444,12 +447,27 @@ void RemoteSelector::iconActivated(QSystemTrayIcon::ActivationReason reason)
 void RemoteSelector::bluetoothOn()
 {
     this->showNormal();
-    //localDevice_.data()->powerOn();
+    localDevice_.data()->setHostMode(QBluetoothLocalDevice::HostDiscoverable);
 
 }
 
 void RemoteSelector::bluetoothOff()
 {
-    this->hide();
-    //localDevice_.data()->setHostMode(QBluetoothLocalDevice::HostPoweredOff);
+    localDevice_.data()->setHostMode(QBluetoothLocalDevice::HostPoweredOff);
+}
+void RemoteSelector::visibilityOnOff()
+{
+    if (ui->checkBox_2->isChecked() )
+        RemoteSelector::visibility=true;
+    else
+        RemoteSelector::visibility=false;
+    changeHostMode();
+}
+void RemoteSelector::powerOnOff()
+{
+    if (ui->checkBox->isChecked() )
+        RemoteSelector::turnOnOff=true;
+    else
+        RemoteSelector::turnOnOff=false;
+    changeHostMode();
 }
