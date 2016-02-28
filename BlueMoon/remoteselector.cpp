@@ -37,7 +37,7 @@ RemoteSelector::RemoteSelector(QWidget* parent)
     //connect(localDevice_.data(), &QBluetoothLocalDevice::error, this, &RemoteSelector::pairingError);
 
     ui->busyWidget->setMovie(new QMovie(":/icons/busy.gif"));
-    ui->busyWidget->movie()->start();
+    //ui->busyWidget->movie()->start();
 
     ui->pairingBusy->setMovie(new QMovie(":/icons/pairing.gif"));
     ui->pairingBusy->hide();
@@ -52,7 +52,8 @@ RemoteSelector::RemoteSelector(QWidget* parent)
     connect(ui->sendFilesButton, &QPushButton::clicked, this, &RemoteSelector::sendFileButton_clicked);
 
     //local name
-    QString labelText = "<b>";
+    QString labelText = "Local device name: ";
+    labelText .append("<b>");
     labelText .append(localDevice_.data()->name());
     labelText .append("</b>");
     ui->label->setText(labelText);
@@ -65,6 +66,7 @@ RemoteSelector::RemoteSelector(QWidget* parent)
 
 void RemoteSelector::startDiscovery(const QBluetoothUuid& uuid) {
     ui->stopButton->setDisabled(false);
+    ui->sendFilesButton->setDisabled(true);
     if (discoveryAgent_->isActive())
         discoveryAgent_->stop();
 
@@ -161,6 +163,7 @@ void RemoteSelector::serviceDiscovered(const QBluetoothServiceInfo& serviceInfo)
 
 void RemoteSelector::discoveryFinished() {
     ui->status->setText(tr("Select the device to send to."));
+    ui->sendFilesButton->setEnabled(true);
     ui->stopButton->setDisabled(true);
     ui->busyWidget->movie()->stop();
     ui->busyWidget->hide();
@@ -270,6 +273,7 @@ void RemoteSelector::pairingError(QBluetoothLocalDevice::Error error) {
     pairingFinished(service_.device().address(), QBluetoothLocalDevice::Unpaired);
 }
 
+//
 void RemoteSelector::on_remoteDevices_cellClicked(int row, int column) {
     Q_UNUSED(column);
     service_ = discoveredServices_.value(row);
@@ -321,6 +325,7 @@ void RemoteSelector::on_remoteDevices_cellClicked(int row, int column) {
     }
 }
 
+//
 void RemoteSelector::on_remoteDevices_itemChanged(QTableWidgetItem* item) {
     int row = item->row();
     int column = item->column();
@@ -356,6 +361,7 @@ void RemoteSelector::sendFileButton_clicked() {
     p->show();
 }
 
+// Show saved trusted device list in the table widget
 void RemoteSelector::showtrustedDeviceList(trusteddevicelist tdl)
 {
 
@@ -427,8 +433,7 @@ void RemoteSelector::createTrayIcon()
 
     trayIcon = new QSystemTrayIcon(this);
     trayIcon->setContextMenu(trayIconMenu);
-    // Or :/icons/bluetooth.svg
-    trayIcon->setIcon(QIcon("bluetooth.svg"));
+    trayIcon->setIcon(QIcon("../icons/scalable_bluemoon.svg"));
 }
 void RemoteSelector::changeHostMode()
 {
@@ -478,8 +483,16 @@ void RemoteSelector::visibilityOnOff()
 void RemoteSelector::powerOnOff()
 {
     if (ui->checkBox_BtOnOff->isChecked() )
+    {
         RemoteSelector::turnOnOff=true;
+        ui->checkBox_BtVisible->setEnabled(true);
+        ui->refreshPB->setEnabled(true);
+    }
     else
+    {
         RemoteSelector::turnOnOff=false;
+        ui->checkBox_BtVisible->setEnabled(false);
+        ui->refreshPB->setEnabled(false);
+    }
     changeHostMode();
 }
