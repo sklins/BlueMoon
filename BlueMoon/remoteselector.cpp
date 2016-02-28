@@ -37,7 +37,7 @@ RemoteSelector::RemoteSelector(QWidget* parent)
     connect(localDevice_.data(), &QBluetoothLocalDevice::error, this, &RemoteSelector::pairingError);
 
     ui->busyWidget->setMovie(new QMovie(":/icons/busy.gif"));
-    ui->busyWidget->movie()->start();
+    //ui->busyWidget->movie()->start();
 
     ui->pairingBusy->setMovie(new QMovie(":/icons/pairing.gif"));
     ui->pairingBusy->hide();
@@ -66,6 +66,7 @@ RemoteSelector::RemoteSelector(QWidget* parent)
 
 void RemoteSelector::startDiscovery(const QBluetoothUuid& uuid) {
     ui->stopButton->setDisabled(false);
+    ui->sendFilesButton->setDisabled(true);
     if (discoveryAgent_->isActive())
         discoveryAgent_->stop();
 
@@ -162,6 +163,7 @@ void RemoteSelector::serviceDiscovered(const QBluetoothServiceInfo& serviceInfo)
 
 void RemoteSelector::discoveryFinished() {
     ui->status->setText(tr("Select the device to send to."));
+    ui->sendFilesButton->setEnabled(true);
     ui->stopButton->setDisabled(true);
     ui->busyWidget->movie()->stop();
     ui->busyWidget->hide();
