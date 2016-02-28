@@ -52,7 +52,8 @@ RemoteSelector::RemoteSelector(QWidget* parent)
     connect(ui->sendFilesButton, &QPushButton::clicked, this, &RemoteSelector::sendFileButton_clicked);
 
     //local name
-    QString labelText = "<b>";
+    QString labelText = "Local device name: ";
+    labelText .append("<b>");
     labelText .append(localDevice_.data()->name());
     labelText .append("</b>");
     ui->label->setText(labelText);
@@ -270,6 +271,7 @@ void RemoteSelector::pairingError(QBluetoothLocalDevice::Error error) {
     pairingFinished(service_.device().address(), QBluetoothLocalDevice::Unpaired);
 }
 
+//
 void RemoteSelector::on_remoteDevices_cellClicked(int row, int column) {
     Q_UNUSED(column);
     service_ = discoveredServices_.value(row);
@@ -314,6 +316,7 @@ void RemoteSelector::on_remoteDevices_cellClicked(int row, int column) {
     }
 }
 
+//
 void RemoteSelector::on_remoteDevices_itemChanged(QTableWidgetItem* item) {
     int row = item->row();
     int column = item->column();
@@ -349,6 +352,7 @@ void RemoteSelector::sendFileButton_clicked() {
     p->show();
 }
 
+// Show saved trusted device list in the table widget
 void RemoteSelector::showtrustedDeviceList(trusteddevicelist tdl)
 {
 
@@ -471,8 +475,14 @@ void RemoteSelector::visibilityOnOff()
 void RemoteSelector::powerOnOff()
 {
     if (ui->checkBox_BtOnOff->isChecked() )
+    {
         RemoteSelector::turnOnOff=true;
+        ui->checkBox_BtVisible->setEnabled(true);
+    }
     else
+    {
         RemoteSelector::turnOnOff=false;
+        ui->checkBox_BtVisible->setEnabled(false);
+    }
     changeHostMode();
 }
