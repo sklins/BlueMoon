@@ -478,11 +478,13 @@ void RemoteSelector::powerOnOff()
     {
         RemoteSelector::turnOnOff=true;
         ui->checkBox_BtVisible->setEnabled(true);
+        ui->refreshPB->setEnabled(true);
     }
     else
     {
         RemoteSelector::turnOnOff=false;
         ui->checkBox_BtVisible->setEnabled(false);
+        ui->refreshPB->setEnabled(false);
     }
     changeHostMode();
 }
