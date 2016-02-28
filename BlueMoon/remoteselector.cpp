@@ -46,8 +46,8 @@ RemoteSelector::RemoteSelector(QWidget* parent)
     ui->remoteDevices->setRowCount(0);
 
     showtrustedDeviceList(trustedDevicelist);
-    connect(ui->checkBox, &QCheckBox::clicked, this, &RemoteSelector::powerOnOff);
-    connect(ui->checkBox_2,&QCheckBox::clicked, this, &RemoteSelector::visibilityOnOff);
+    connect(ui->checkBox_BtOnOff, &QCheckBox::clicked, this, &RemoteSelector::powerOnOff);
+    connect(ui->checkBox_BtVisible,&QCheckBox::clicked, this, &RemoteSelector::visibilityOnOff);
 
     connect(ui->sendFilesButton, &QPushButton::clicked, this, &RemoteSelector::sendFileButton_clicked);
 
@@ -462,7 +462,7 @@ void RemoteSelector::bluetoothOff()
 }
 void RemoteSelector::visibilityOnOff()
 {
-    if (ui->checkBox_2->isChecked() )
+    if (ui->checkBox_BtVisible->isChecked() )
         RemoteSelector::visibility=true;
     else
         RemoteSelector::visibility=false;
@@ -470,7 +470,7 @@ void RemoteSelector::visibilityOnOff()
 }
 void RemoteSelector::powerOnOff()
 {
-    if (ui->checkBox->isChecked() )
+    if (ui->checkBox_BtOnOff->isChecked() )
         RemoteSelector::turnOnOff=true;
     else
         RemoteSelector::turnOnOff=false;

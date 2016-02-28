@@ -208,7 +208,7 @@
     </item>
    </layout>
   </widget>
-  <widget class="QCheckBox" name="checkBox">
+  <widget class="QCheckBox" name="checkBox_BtOnOff">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -221,7 +221,7 @@
     <string>Bluetooth</string>
    </property>
   </widget>
-  <widget class="QCheckBox" name="checkBox_2">
+  <widget class="QCheckBox" name="checkBox_BtVisible">
    <property name="geometry">
     <rect>
      <x>140</x>
