@@ -24,17 +24,17 @@ RemoteSelector::RemoteSelector(QWidget* parent)
     QBluetoothAddress adapterAddress = localDevice_->address();
     discoveryAgent_.reset(new QBluetoothServiceDiscoveryAgent(adapterAddress));
 
-    connect(discoveryAgent_.data(), &QBluetoothServiceDiscoveryAgent::serviceDiscovered, this, &RemoteSelector::serviceDiscovered);
-    connect(discoveryAgent_.data(), &QBluetoothServiceDiscoveryAgent::serviceDiscovered, this, &RemoteSelector::discoveryFinished);
-    connect(discoveryAgent_.data(), &QBluetoothServiceDiscoveryAgent::canceled, this, &RemoteSelector::discoveryFinished);
+    //connect(discoveryAgent_.data(), &QBluetoothServiceDiscoveryAgent::serviceDiscovered, this, &RemoteSelector::serviceDiscovered);
+    //connect(discoveryAgent_.data(), &QBluetoothServiceDiscoveryAgent::serviceDiscovered, this, &RemoteSelector::discoveryFinished);
+    //connect(discoveryAgent_.data(), &QBluetoothServiceDiscoveryAgent::canceled, this, &RemoteSelector::discoveryFinished);
 
     ui->remoteDevices->setColumnWidth(3, 75);
     ui->remoteDevices->setColumnWidth(4, 100);
 
-    connect(localDevice_.data(), &QBluetoothLocalDevice::pairingDisplayPinCode, this, &RemoteSelector::displayPin);
-    connect(localDevice_.data(), &QBluetoothLocalDevice::pairingDisplayConfirmation, this, &RemoteSelector::displayConfirmation);
-    connect(localDevice_.data(), &QBluetoothLocalDevice::pairingFinished, this, &RemoteSelector::pairingFinished);
-    connect(localDevice_.data(), &QBluetoothLocalDevice::error, this, &RemoteSelector::pairingError);
+    //connect(localDevice_.data(), &QBluetoothLocalDevice::pairingDisplayPinCode, this, &RemoteSelector::displayPin);
+    //connect(localDevice_.data(), &QBluetoothLocalDevice::pairingDisplayConfirmation, this, &RemoteSelector::displayConfirmation);
+    //connect(localDevice_.data(), &QBluetoothLocalDevice::pairingFinished, this, &RemoteSelector::pairingFinished);
+    //connect(localDevice_.data(), &QBluetoothLocalDevice::error, this, &RemoteSelector::pairingError);
 
     ui->busyWidget->setMovie(new QMovie(":/icons/busy.gif"));
     ui->busyWidget->movie()->start();
@@ -275,13 +275,20 @@ void RemoteSelector::on_remoteDevices_cellClicked(int row, int column) {
     service_ = discoveredServices_.value(row);
     QBluetoothServiceInfo service;
     QTableWidgetItem *item;
+
+    QAbstractItemModel* model = ui->remoteDevices->model();
+    QModelIndex idx = model->index(row, 0);
+    QString macAddress = model->data(idx).toString();
+    //QString macAddress;
+    //QTableWidgetItem* itm = ui.remoteDevices->item( row, 0 );
+    //if (itm)
+    //    macAddress = itm->text();
     if (column==4)
     {
-        if(ui->remoteDevices->item(row, 4)->checkState() == Qt::Checked)
+        if(trustedDevicelist.isTrusted(macAddress))
         {
             item=new QTableWidgetItem();
-            item->setCheckState(Qt::Unchecked);
-            ui->remoteDevices->setItem(row,4, item);
+            ui->remoteDevices->item(row, 4)->setCheckState(Qt::Unchecked);
 
             QString address= ui->remoteDevices->item(row, 0)->text();
             for (int i = 0; i < discoveredServices_.count(); i++)
@@ -290,7 +297,7 @@ void RemoteSelector::on_remoteDevices_cellClicked(int row, int column) {
                     service = discoveredServices_.value(i);
                 }
             }
-            trustedDevicelist.deleteFromTrustList(service);
+            trustedDevicelist.deleteFromTrustList(macAddress);
             trustedDevicelist.writeToTrustedDeviceList();
         }
         else

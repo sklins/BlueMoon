@@ -92,18 +92,21 @@ void trusteddevicelist::addToTrustList(const QBluetoothServiceInfo& serviceInfo)
     QVector<QString> device;
     QBluetoothDeviceInfo deviceInfo=serviceInfo.device();
 
-    device.prepend(deviceInfo.address().toString());
-    device.prepend(deviceInfo.name());
-    device.prepend(serviceInfo.serviceDescription());
+    if (!trusteddevicelist::isTrusted(deviceInfo.address().toString()))
+    {
+        device.prepend(deviceInfo.address().toString());
+        device.prepend(deviceInfo.name());
+        device.prepend(serviceInfo.serviceDescription());
 
-    trustedDevices.prepend(device);
+        trustedDevices.prepend(device);
+    }
+
 }
-void trusteddevicelist::deleteFromTrustList(const QBluetoothServiceInfo& serviceInfo)
+void trusteddevicelist::deleteFromTrustList(QString macAddress)
 {
-    QString address=serviceInfo.device().address().toString();
     for(int i=0;i<trustedDevices.length();i++)
     {
-        if(trustedDevices[i][2]==address)
+        if(trustedDevices[i][2]==macAddress)
             trustedDevices.remove(i);
     }
 
