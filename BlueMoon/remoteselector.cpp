@@ -426,8 +426,7 @@ void RemoteSelector::createTrayIcon()
 
     trayIcon = new QSystemTrayIcon(this);
     trayIcon->setContextMenu(trayIconMenu);
-    // Or :/icons/bluetooth.svg
-    trayIcon->setIcon(QIcon("bluetooth.svg"));
+    trayIcon->setIcon(QIcon("../icons/scalable_bluemoon.svg"));
 }
 void RemoteSelector::changeHostMode()
 {
