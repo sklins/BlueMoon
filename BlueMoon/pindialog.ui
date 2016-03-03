@@ -10,6 +10,18 @@
     <height>153</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>240</width>
+    <height>153</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>240</width>
+    <height>153</height>
+   </size>
+  </property>
   <property name="windowTitle">
    <string>Enter Pin Code</string>
   </property>

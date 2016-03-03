@@ -25,7 +25,7 @@ public:
     QVector<QVector<QString> > getTrustedDevices();
 
     void addToTrustList(const QBluetoothServiceInfo& serviceInfo);
-    void deleteFromTrustList(QString macAddress);
+    void deleteFromTrustList(QString macAddress);//const QBluetoothServiceInfo& serviceInfo);
 
     bool isTrusted(QString macAddress);
 

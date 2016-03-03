@@ -12,29 +12,34 @@ RemoteSelector::RemoteSelector(QWidget* parent)
     //Stuff with local trusted deviceList
     trustedDevicelist =  trusteddevicelist();
     //TODO:check path
+    //if (!QDir("/etc/bluemoon_bluetooth").exists())
+    //    QDir().mkdir("/home/linke/Desktop/bluemoon_blth");
+
     QString dir=QDir::currentPath();
     int lastIndex=dir.lastIndexOf('/');
     dir.resize(lastIndex+1);
+
     trustedDevicelist.setFileName(QString("list.dat"));
     //TODO: choose file direcory
-    trustedDevicelist.setFileDirectory(dir);//
+    //trustedDevicelist.setFileDirectory("/etc/bluemoon_bluetooth/");
+    trustedDevicelist.setFileDirectory(dir);
     trustedDevicelist.readTrustedDeviceList();
 
     localDevice_.reset(new QBluetoothLocalDevice);
     QBluetoothAddress adapterAddress = localDevice_->address();
     discoveryAgent_.reset(new QBluetoothServiceDiscoveryAgent(adapterAddress));
 
-    //connect(discoveryAgent_.data(), &QBluetoothServiceDiscoveryAgent::serviceDiscovered, this, &RemoteSelector::serviceDiscovered);
-    //connect(discoveryAgent_.data(), &QBluetoothServiceDiscoveryAgent::serviceDiscovered, this, &RemoteSelector::discoveryFinished);
-    //connect(discoveryAgent_.data(), &QBluetoothServiceDiscoveryAgent::canceled, this, &RemoteSelector::discoveryFinished);
+    connect(discoveryAgent_.data(), &QBluetoothServiceDiscoveryAgent::serviceDiscovered, this, &RemoteSelector::serviceDiscovered);
+    connect(discoveryAgent_.data(), &QBluetoothServiceDiscoveryAgent::serviceDiscovered, this, &RemoteSelector::discoveryFinished);
+    connect(discoveryAgent_.data(), &QBluetoothServiceDiscoveryAgent::canceled, this, &RemoteSelector::discoveryFinished);
 
     ui->remoteDevices->setColumnWidth(3, 75);
     ui->remoteDevices->setColumnWidth(4, 100);
 
-    //connect(localDevice_.data(), &QBluetoothLocalDevice::pairingDisplayPinCode, this, &RemoteSelector::displayPin);
-    //connect(localDevice_.data(), &QBluetoothLocalDevice::pairingDisplayConfirmation, this, &RemoteSelector::displayConfirmation);
-    //connect(localDevice_.data(), &QBluetoothLocalDevice::pairingFinished, this, &RemoteSelector::pairingFinished);
-    //connect(localDevice_.data(), &QBluetoothLocalDevice::error, this, &RemoteSelector::pairingError);
+    connect(localDevice_.data(), &QBluetoothLocalDevice::pairingDisplayPinCode, this, &RemoteSelector::displayPin);
+    connect(localDevice_.data(), &QBluetoothLocalDevice::pairingDisplayConfirmation, this, &RemoteSelector::displayConfirmation);
+    connect(localDevice_.data(), &QBluetoothLocalDevice::pairingFinished, this, &RemoteSelector::pairingFinished);
+    connect(localDevice_.data(), &QBluetoothLocalDevice::error, this, &RemoteSelector::pairingError);
 
     ui->busyWidget->setMovie(new QMovie(":/icons/busy.gif"));
     //ui->busyWidget->movie()->start();
@@ -123,42 +128,51 @@ void RemoteSelector::serviceDiscovered(const QBluetoothServiceInfo& serviceInfo)
                 trustedDevicelist.isTrusted(serviceInfo.device().address().toString()) ? "yes" : "no",
                 serviceInfo.device().isValid() ? "yes" : "no",
                 serviceInfo.serviceDescription());
-    int row = ui->remoteDevices->rowCount();
-    ui->remoteDevices->insertRow(row);
-    QTableWidgetItem *item = new QTableWidgetItem(serviceInfo.device().address().toString());
-    item->setToolTip(tooltip);
-    ui->remoteDevices->setItem(row, 0, item);
-    item = new QTableWidgetItem(serviceInfo.device().name());
-    ui->remoteDevices->setItem(row, 1, item);
-    item = new QTableWidgetItem(serviceInfo.serviceName());
+    if (!trustedDevicelist.isTrusted(serviceInfo.device().address().toString()))
+    {
+        int row = ui->remoteDevices->rowCount();
+        ui->remoteDevices->insertRow(row);
+        QTableWidgetItem *item = new QTableWidgetItem(serviceInfo.device().address().toString());
+        item->setToolTip(tooltip);
+        ui->remoteDevices->setItem(row, 0, item);
+        item = new QTableWidgetItem(serviceInfo.device().name());
+        ui->remoteDevices->setItem(row, 1, item);
+        item = new QTableWidgetItem(serviceInfo.serviceName());
 
-    ui->remoteDevices->setItem(row, 2, item);
+        ui->remoteDevices->setItem(row, 2, item);
 
-    QBluetoothLocalDevice::Pairing p;
+        QBluetoothLocalDevice::Pairing p;
 
-    p = localDevice_->pairingStatus(serviceInfo.device().address());
+        p = localDevice_->pairingStatus(serviceInfo.device().address());
 
-    ui->remoteDevices->blockSignals(true);
+        ui->remoteDevices->blockSignals(true);
 
-    item = new QTableWidgetItem();
-    if ((p&QBluetoothLocalDevice::Paired) || (p&QBluetoothLocalDevice::AuthorizedPaired))
-        item->setCheckState(Qt::Checked);
-    else
-        item->setCheckState(Qt::Unchecked);
-    ui->remoteDevices->setItem(row, 3, item);
+        item = new QTableWidgetItem();
+        if ((p&QBluetoothLocalDevice::Paired) || (p&QBluetoothLocalDevice::AuthorizedPaired))
+            item->setCheckState(Qt::Checked);
+        else
+            item->setCheckState(Qt::Unchecked);
+        ui->remoteDevices->setItem(row, 3, item);
 
-    item = new QTableWidgetItem();
-    if (p&QBluetoothLocalDevice::AuthorizedPaired)
-        item->setCheckState(Qt::Checked);
-    else
-        item->setCheckState(Qt::Unchecked);
+        item = new QTableWidgetItem();
+        if (p&QBluetoothLocalDevice::AuthorizedPaired)
+            item->setCheckState(Qt::Checked);
+        else
+            item->setCheckState(Qt::Unchecked);
+        ui->remoteDevices->setItem(row, 4, item);
 
-    ui->remoteDevices->setItem(row, 4, item);
+        item = new QTableWidgetItem();
+        if (trustedDevicelist.isTrusted(serviceInfo.device().address().toString()))
+            item->setCheckState(Qt::Checked);
+        else
+            item->setCheckState(Qt::Unchecked);
+        ui->remoteDevices->setItem(row, 5, item);
 
-    ui->remoteDevices->blockSignals(false);
+        ui->remoteDevices->blockSignals(false);
 
 
-    discoveredServices_.insert(row, serviceInfo);
+        discoveredServices_.insert(row, serviceInfo);
+    }
 }
 
 void RemoteSelector::discoveryFinished() {
@@ -283,24 +297,15 @@ void RemoteSelector::on_remoteDevices_cellClicked(int row, int column) {
     QAbstractItemModel* model = ui->remoteDevices->model();
     QModelIndex idx = model->index(row, 0);
     QString macAddress = model->data(idx).toString();
-    //QString macAddress;
-    //QTableWidgetItem* itm = ui.remoteDevices->item( row, 0 );
-    //if (itm)
-    //    macAddress = itm->text();
-    if (column==4)
+
+    /*if (column==5)
     {
         if(trustedDevicelist.isTrusted(macAddress))
         {
             item=new QTableWidgetItem();
-            ui->remoteDevices->item(row, 4)->setCheckState(Qt::Unchecked);
+            item->setCheckState(Qt::Unchecked);
+            ui->remoteDevices->setItem(row,5, item);
 
-            QString address= ui->remoteDevices->item(row, 0)->text();
-            for (int i = 0; i < discoveredServices_.count(); i++)
-            {
-                if (discoveredServices_.value(i).device().address().toString() == address) {
-                    service = discoveredServices_.value(i);
-                }
-            }
             trustedDevicelist.deleteFromTrustList(macAddress);
             trustedDevicelist.writeToTrustedDeviceList();
         }
@@ -308,9 +313,8 @@ void RemoteSelector::on_remoteDevices_cellClicked(int row, int column) {
         {
             item=new QTableWidgetItem();
             item->setCheckState(Qt::Checked);
-            ui->remoteDevices->setItem(row,4, item);
+            ui->remoteDevices->setItem(row,5, item);
 
-            ui->remoteDevices->item(row, 4)->setCheckState(Qt::Checked);
             QString address=  ui->remoteDevices->item(row, 0)->text();
             for (int i = 0; i < discoveredServices_.count(); i++)
             {
@@ -322,7 +326,7 @@ void RemoteSelector::on_remoteDevices_cellClicked(int row, int column) {
             trustedDevicelist.writeToTrustedDeviceList();
         }//
 
-    }
+    }*/
 }
 
 //
@@ -331,7 +335,7 @@ void RemoteSelector::on_remoteDevices_itemChanged(QTableWidgetItem* item) {
     int column = item->column();
     service_ = discoveredServices_.value(row);
 
-    if (column < 3)
+    if (column < 3 | column == 5)
         return;
 
     if (item->checkState() == Qt::Unchecked && column == 3){
@@ -367,7 +371,6 @@ void RemoteSelector::showtrustedDeviceList(trusteddevicelist tdl)
 
     QVector<QVector<QString> >trustedList=tdl.getTrustedDevices();
     QTableWidgetItem *item;
-
     for (int i = 0; i < trustedList.size(); ++i)
     {
         int row = ui->remoteDevices->rowCount();
@@ -382,12 +385,8 @@ void RemoteSelector::showtrustedDeviceList(trusteddevicelist tdl)
         ui->remoteDevices->setItem(i,2, item);
 
         item=new QTableWidgetItem();
-        item->setCheckState(Qt::Unchecked);
-        ui->remoteDevices->setItem(i,3, item);
-
-        item=new QTableWidgetItem();
         item->setCheckState(Qt::Checked);
-        ui->remoteDevices->setItem(i,4, item);
+        ui->remoteDevices->setItem(i,5,item);
     }
 }
 

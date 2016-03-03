@@ -13,6 +13,18 @@
     <height>490</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>770</width>
+    <height>490</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>770</width>
+    <height>490</height>
+   </size>
+  </property>
   <property name="windowTitle">
    <string>BlueMoon Bluetooth Manager</string>
   </property>
@@ -78,22 +90,6 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="stopButton">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="text">
-         <string>Stop</string>
-        </property>
-       </widget>
-      </item>
-      <item>
        <widget class="QPushButton" name="refreshPB">
         <property name="enabled">
          <bool>false</bool>
@@ -106,6 +102,22 @@
         </property>
         <property name="text">
          <string>Refresh</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="stopButton">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>Stop</string>
         </property>
        </widget>
       </item>
@@ -194,10 +206,15 @@
       </column>
       <column>
        <property name="text">
-        <string>Trusted</string>
+        <string>Authorized</string>
        </property>
        <property name="textAlignment">
         <set>AlignCenter</set>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Trusted</string>
        </property>
       </column>
      </widget>
