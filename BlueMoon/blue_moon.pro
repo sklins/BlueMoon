@@ -29,3 +29,6 @@ OTHER_FILES += \
 RESOURCES += \
     blue_moon.qrc
 
+DISTFILES += \
+    UML.qmodel
+
