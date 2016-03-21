@@ -49,7 +49,7 @@
                          </base-DElement>
                          <object>{7acc63f9-5974-414b-8c08-fe5fd3ad0492}</object>
                          <name>TrustedDeviceList</name>
-                         <pos>x:145;y:130</pos>
+                         <pos>x:140;y:160</pos>
                          <rect>x:-170;y:-135;w:340;h:270</rect>
                          <visual-role>0</visual-role>
                          <visual-emphasized>true</visual-emphasized>
@@ -71,7 +71,7 @@
                          </base-DElement>
                          <object>{4bb9ef29-a896-4a4d-a2eb-c152e7af0bcc}</object>
                          <name>Progress</name>
-                         <pos>x:520;y:115</pos>
+                         <pos>x:545;y:130</pos>
                          <rect>x:-165;y:-115;w:330;h:230</rect>
                          <visual-role>0</visual-role>
                          <visual-emphasized>true</visual-emphasized>
@@ -93,8 +93,8 @@
                          </base-DElement>
                          <object>{310f9b5d-4995-4e85-835e-4b1a2fe24d63}</object>
                          <name>RemoteSelector</name>
-                         <pos>x:520;y:395</pos>
-                         <rect>x:-140;y:-65;w:280;h:130</rect>
+                         <pos>x:545;y:400</pos>
+                         <rect>x:-145;y:-65;w:290;h:130</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
                          <visual-emphasized>true</visual-emphasized>
@@ -116,7 +116,7 @@
                          </base-DElement>
                          <object>{1584d2ea-f096-436d-aa53-23e99dbce9e1}</object>
                          <name>PinDialog</name>
-                         <pos>x:160;y:360</pos>
+                         <pos>x:165;y:400</pos>
                          <rect>x:-190;y:-50;w:380;h:100</rect>
                          <visual-role>0</visual-role>
                          <visual-emphasized>true</visual-emphasized>
@@ -133,10 +133,10 @@
                         <DRelation>
                          <base-DElement>
                           <DElement>
-                           <uid>{e0129a71-3cf2-4fe0-9894-d85a7bf58d97}</uid>
+                           <uid>{549046ad-50d6-442c-9b4c-7a11d515adb2}</uid>
                           </DElement>
                          </base-DElement>
-                         <object>{a8136d92-077e-417b-8cae-47bb23ea352c}</object>
+                         <object>{d5b6617d-ccdc-45d2-bb66-8c2457184044}</object>
                          <a>{f6acd5b7-eed0-4290-b011-2a861168395a}</a>
                          <b>{b06ec111-b804-485d-aa36-406bcdc24628}</b>
                         </DRelation>
@@ -144,6 +144,55 @@
                        <a>
                         <DAssociationEnd>
                          <navigable>true</navigable>
+                         <kind>2</kind>
+                        </DAssociationEnd>
+                       </a>
+                      </DAssociation>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DAssociation">
+                      <DAssociation>
+                       <base-DRelation>
+                        <DRelation>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{fa389f5a-40d8-4035-997c-730f15b8fc04}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{a8847ff8-50a4-4a8d-8fda-d9827060868c}</object>
+                         <a>{f6acd5b7-eed0-4290-b011-2a861168395a}</a>
+                         <b>{5b939b83-0318-44d6-af59-a6dc4859d4e6}</b>
+                        </DRelation>
+                       </base-DRelation>
+                       <a>
+                        <DAssociationEnd>
+                         <navigable>true</navigable>
+                         <kind>2</kind>
+                        </DAssociationEnd>
+                       </a>
+                      </DAssociation>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DAssociation">
+                      <DAssociation>
+                       <base-DRelation>
+                        <DRelation>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{0d16911a-6ab7-4308-8745-a2a4061be183}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{163b7241-f14a-4d07-b6f8-0ba31fdf5de9}</object>
+                         <a>{f6acd5b7-eed0-4290-b011-2a861168395a}</a>
+                         <b>{8e1c0951-83b0-456b-9c05-eabf6301c0b4}</b>
+                        </DRelation>
+                       </base-DRelation>
+                       <a>
+                        <DAssociationEnd>
+                         <navigable>true</navigable>
+                         <kind>2</kind>
                         </DAssociationEnd>
                        </a>
                       </DAssociation>
@@ -151,7 +200,7 @@
                     </item>
                    </qlist>
                   </elements>
-                  <last-modified>1457995125537</last-modified>
+                  <last-modified>1458588503314</last-modified>
                  </MDiagram>
                 </base-MDiagram>
                </MCanvasDiagram>
@@ -179,7 +228,7 @@
                  <qlist>
                   <item>
                    <MClassMember>
-                    <uid>{4bf5e1d7-4adc-420d-8127-df42465988ef}</uid>
+                    <uid>{bbbc54cc-6649-4068-82a5-e3c88517a078}</uid>
                     <visibility>1</visibility>
                     <type>2</type>
                     <declaration>trusteddevicelist()</declaration>
@@ -187,7 +236,7 @@
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{8a93efae-f368-4042-90da-d60411f7e121}</uid>
+                    <uid>{5c2292e2-7540-4987-8abc-7bc558820e6e}</uid>
                     <visibility>3</visibility>
                     <type>1</type>
                     <declaration>QString fileName</declaration>
@@ -195,7 +244,7 @@
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{005d8e2b-3daf-4a97-acee-ffff814907fd}</uid>
+                    <uid>{56a3ab72-56b0-4e6a-bfc2-369c28b0605f}</uid>
                     <visibility>3</visibility>
                     <type>1</type>
                     <declaration>QString fileDirectory</declaration>
@@ -203,7 +252,7 @@
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{3c7ce46f-a9d8-467c-a4ef-8b826e6b7398}</uid>
+                    <uid>{3dfc3162-e7cc-455a-97bf-675fd112eeb0}</uid>
                     <visibility>3</visibility>
                     <type>1</type>
                     <declaration>QVector&lt;QVector&lt;QString&gt; &gt; trustedDevices</declaration>
@@ -211,7 +260,7 @@
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{f150155a-b038-45a5-9684-a6afaf172567}</uid>
+                    <uid>{ba41ff52-a07d-4566-9ac9-422d55c72d31}</uid>
                     <visibility>1</visibility>
                     <type>2</type>
                     <declaration>void setFileName(QString filename)</declaration>
@@ -219,7 +268,7 @@
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{b95876b0-21cd-4e30-afb7-fba58fb7dd15}</uid>
+                    <uid>{7c4c1985-0240-4ce9-8886-c6531719eb26}</uid>
                     <visibility>1</visibility>
                     <type>2</type>
                     <declaration>QString getFileName()</declaration>
@@ -227,7 +276,7 @@
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{36d12044-89ff-4abf-82f3-81378e6cf6e7}</uid>
+                    <uid>{9fd38af1-a8d3-46ad-9e18-0a0ff34e116a}</uid>
                     <visibility>1</visibility>
                     <type>2</type>
                     <declaration>void setFileDirectory(QString filedirectory)</declaration>
@@ -235,7 +284,7 @@
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{45d4e247-e368-4982-80df-5fcf639402fb}</uid>
+                    <uid>{7124a837-e6a9-4c1e-851d-ac449c897914}</uid>
                     <visibility>1</visibility>
                     <type>2</type>
                     <declaration>QString getFileDirectory()</declaration>
@@ -243,7 +292,7 @@
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{931d8dc7-932d-4631-acc7-bf604b835f03}</uid>
+                    <uid>{0a867447-12bf-4135-ab52-c87da008fb12}</uid>
                     <visibility>1</visibility>
                     <type>2</type>
                     <declaration>void setTrusteddevices(QVector&lt;QVector&lt;QString&gt; &gt; tD)</declaration>
@@ -251,7 +300,7 @@
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{2232cfaf-0006-4d0c-b874-eb2c0f9416af}</uid>
+                    <uid>{d6bafb6b-f2c1-453a-8690-c6c2aa622b7f}</uid>
                     <visibility>1</visibility>
                     <type>2</type>
                     <declaration>QVector&lt;QVector&lt;QString&gt; &gt; getTrustedDevices()</declaration>
@@ -259,7 +308,7 @@
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{3349e362-a60e-43b4-95f3-8965da27e5fa}</uid>
+                    <uid>{dae688f5-faa6-431d-ade8-b9b94e4fcbe8}</uid>
                     <visibility>1</visibility>
                     <type>2</type>
                     <declaration>void addToTrustList(const QBluetoothServiceInfo&amp; serviceInfo)</declaration>
@@ -267,7 +316,7 @@
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{0856958d-fa4c-4cc3-9d3f-1916d6e881ae}</uid>
+                    <uid>{7681d5f4-383f-4ced-96c4-a7fc521380ea}</uid>
                     <visibility>1</visibility>
                     <type>2</type>
                     <declaration>void deleteFromTrustList(QString macAddress)</declaration>
@@ -275,7 +324,7 @@
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{c75e367e-0530-4edb-b48d-7c730d865738}</uid>
+                    <uid>{49d425ab-d845-4078-821e-16766afe9c25}</uid>
                     <visibility>1</visibility>
                     <type>2</type>
                     <declaration>bool isTrusted(QString macAddress)</declaration>
@@ -283,7 +332,7 @@
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{b5305e3c-ea79-4bd3-9d92-337c1256ee22}</uid>
+                    <uid>{f08443d5-1589-4b2a-810f-a17683d4212f}</uid>
                     <visibility>1</visibility>
                     <type>2</type>
                     <declaration>void readTrustedDeviceList()</declaration>
@@ -291,7 +340,7 @@
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{a65a375d-456f-4ce2-9f8e-f5ba992dd8dd}</uid>
+                    <uid>{f48b6ae5-8677-437f-a688-69bdd5d6bf21}</uid>
                     <visibility>1</visibility>
                     <type>2</type>
                     <declaration>void writeToTrustedDeviceList()</declaration>
@@ -324,7 +373,7 @@
                  <qlist>
                   <item>
                    <MClassMember>
-                    <uid>{a0da3952-5c29-4e62-a1dd-ca0aa4b7adfb}</uid>
+                    <uid>{b96cfb7c-b5f4-4fc2-94b8-da228f1557c7}</uid>
                     <visibility>1</visibility>
                     <type>2</type>
                     <declaration>explicit Progress(QWidget*, const QBluetoothServiceInfo&amp;)</declaration>
@@ -332,7 +381,7 @@
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{29777c46-6977-4edb-9a0b-7d2c4e4ed5aa}</uid>
+                    <uid>{ac900adb-e0d6-4af2-b9e6-3cb30276c07a}</uid>
                     <visibility>7</visibility>
                     <type>2</type>
                     <declaration>void finished(QBluetoothTransferReply*)</declaration>
@@ -340,7 +389,7 @@
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{6128a1a5-393b-4e3e-8b2f-3ae651b737ee}</uid>
+                    <uid>{b339c285-4974-43a3-81c9-0239d740e67a}</uid>
                     <visibility>7</visibility>
                     <type>2</type>
                     <declaration>void uploadProgress(qint64 bytesSent, qint64 bytesTotal)</declaration>
@@ -348,7 +397,7 @@
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{6c42c27d-63b8-4552-b130-ccb24bc8fa66}</uid>
+                    <uid>{382684eb-4547-4dea-9097-dbbbe553c0af}</uid>
                     <visibility>5</visibility>
                     <type>2</type>
                     <declaration>void chooseFile()</declaration>
@@ -356,7 +405,7 @@
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{bcffd234-4c04-4f2d-91d7-413a49874c5d}</uid>
+                    <uid>{126f9e2d-6ab2-4683-bbaf-a4949a54b474}</uid>
                     <visibility>5</visibility>
                     <type>2</type>
                     <declaration>void startTransfer()</declaration>
@@ -364,7 +413,7 @@
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{81112937-6f30-4a36-ace2-baec31470f67}</uid>
+                    <uid>{972adede-8a7f-4023-b02e-bc903e523897}</uid>
                     <visibility>3</visibility>
                     <type>1</type>
                     <declaration>QScopedPointer&lt;Ui::Progress&gt; ui</declaration>
@@ -372,7 +421,7 @@
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{923975ee-dda7-4145-9537-b0db5a442191}</uid>
+                    <uid>{32b27ba5-40f2-4e6f-bcd7-bb11f69ca4e5}</uid>
                     <visibility>3</visibility>
                     <type>1</type>
                     <declaration>QTime start</declaration>
@@ -380,7 +429,7 @@
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{ec322d7b-463f-41b3-aff2-4e69fab78939}</uid>
+                    <uid>{354e1f66-a934-470d-b480-3f1f92786483}</uid>
                     <visibility>3</visibility>
                     <type>1</type>
                     <declaration>QBluetoothServiceInfo service_</declaration>
@@ -388,7 +437,7 @@
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{8dbf2734-c171-4881-98d8-c6de0cc3644f}</uid>
+                    <uid>{0cd8dbfc-7712-48c1-9a96-d22490b73db6}</uid>
                     <visibility>3</visibility>
                     <type>1</type>
                     <declaration>QScopedPointer&lt;QBluetoothTransferManager&gt; mgr_</declaration>
@@ -396,7 +445,7 @@
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{056399fc-c35e-481c-a6e0-9b142b6fc518}</uid>
+                    <uid>{2c90482d-1cba-4c48-8d0d-795a3d5ea9e5}</uid>
                     <visibility>3</visibility>
                     <type>1</type>
                     <declaration>QScopedPointer&lt;QBluetoothTransferRequest&gt; req_</declaration>
@@ -404,7 +453,7 @@
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{904db4c4-eeda-4642-a076-364c0df4c5d2}</uid>
+                    <uid>{230ae0df-a063-4d43-b463-c8a0c755150e}</uid>
                     <visibility>3</visibility>
                     <type>1</type>
                     <declaration>QScopedPointer&lt;QBluetoothTransferReply&gt; reply_</declaration>
@@ -412,7 +461,7 @@
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{8e9d0d58-9dc6-4449-8b7a-6938c1b42430}</uid>
+                    <uid>{43387454-99f9-4672-8dce-219ba489063b}</uid>
                     <visibility>3</visibility>
                     <type>1</type>
                     <declaration>QScopedPointer&lt;QFile&gt; file_</declaration>
@@ -514,6 +563,90 @@
                         </target>
                        </handle>
                       </item>
+                      <item>
+                       <handle>
+                        <uid>{d5b6617d-ccdc-45d2-bb66-8c2457184044}</uid>
+                        <target>
+                         <instance type="MAssociation">
+                          <MAssociation>
+                           <base-MRelation>
+                            <MRelation>
+                             <base-MElement>
+                              <MElement>
+                               <uid>{d5b6617d-ccdc-45d2-bb66-8c2457184044}</uid>
+                              </MElement>
+                             </base-MElement>
+                             <a>{310f9b5d-4995-4e85-835e-4b1a2fe24d63}</a>
+                             <b>{4bb9ef29-a896-4a4d-a2eb-c152e7af0bcc}</b>
+                            </MRelation>
+                           </base-MRelation>
+                           <a>
+                            <MAssociationEnd>
+                             <navigable>true</navigable>
+                             <kind>2</kind>
+                            </MAssociationEnd>
+                           </a>
+                          </MAssociation>
+                         </instance>
+                        </target>
+                       </handle>
+                      </item>
+                      <item>
+                       <handle>
+                        <uid>{a8847ff8-50a4-4a8d-8fda-d9827060868c}</uid>
+                        <target>
+                         <instance type="MAssociation">
+                          <MAssociation>
+                           <base-MRelation>
+                            <MRelation>
+                             <base-MElement>
+                              <MElement>
+                               <uid>{a8847ff8-50a4-4a8d-8fda-d9827060868c}</uid>
+                              </MElement>
+                             </base-MElement>
+                             <a>{310f9b5d-4995-4e85-835e-4b1a2fe24d63}</a>
+                             <b>{1584d2ea-f096-436d-aa53-23e99dbce9e1}</b>
+                            </MRelation>
+                           </base-MRelation>
+                           <a>
+                            <MAssociationEnd>
+                             <navigable>true</navigable>
+                             <kind>2</kind>
+                            </MAssociationEnd>
+                           </a>
+                          </MAssociation>
+                         </instance>
+                        </target>
+                       </handle>
+                      </item>
+                      <item>
+                       <handle>
+                        <uid>{163b7241-f14a-4d07-b6f8-0ba31fdf5de9}</uid>
+                        <target>
+                         <instance type="MAssociation">
+                          <MAssociation>
+                           <base-MRelation>
+                            <MRelation>
+                             <base-MElement>
+                              <MElement>
+                               <uid>{163b7241-f14a-4d07-b6f8-0ba31fdf5de9}</uid>
+                              </MElement>
+                             </base-MElement>
+                             <a>{310f9b5d-4995-4e85-835e-4b1a2fe24d63}</a>
+                             <b>{7acc63f9-5974-414b-8c08-fe5fd3ad0492}</b>
+                            </MRelation>
+                           </base-MRelation>
+                           <a>
+                            <MAssociationEnd>
+                             <navigable>true</navigable>
+                             <kind>2</kind>
+                            </MAssociationEnd>
+                           </a>
+                          </MAssociation>
+                         </instance>
+                        </target>
+                       </handle>
+                      </item>
                      </qlist>
                     </handles>
                    </handles>
@@ -524,7 +657,7 @@
                  <qlist>
                   <item>
                    <MClassMember>
-                    <uid>{ce6e2d34-75d1-4aad-a4e4-9dc5da4787ce}</uid>
+                    <uid>{95b5cc3f-897c-4a57-8f70-394abe0c875d}</uid>
                     <visibility>1</visibility>
                     <type>2</type>
                     <declaration>explicit RemoteSelector(QWidget* = 0)</declaration>
@@ -532,7 +665,7 @@
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{33a8f7dc-ca71-4761-831e-8c842ba101d8}</uid>
+                    <uid>{849fa69e-90f2-4143-8bf3-386a12c32a56}</uid>
                     <visibility>1</visibility>
                     <type>1</type>
                     <declaration>bool turnOnOff=false</declaration>
@@ -540,7 +673,7 @@
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{9dd1424e-b3d7-4b23-ac3e-3a8bc5c71479}</uid>
+                    <uid>{073db30e-3080-4eb0-99dd-2800c726ffaf}</uid>
                     <visibility>1</visibility>
                     <type>1</type>
                     <declaration>bool visibility=false</declaration>
@@ -548,7 +681,7 @@
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{30b005ec-899c-46bd-bdbf-6c7bd46c00a6}</uid>
+                    <uid>{5b1411e8-bf38-4094-97b9-b36a79103b74}</uid>
                     <visibility>1</visibility>
                     <type>2</type>
                     <declaration>void startDiscovery(const QBluetoothUuid&amp; uuid)</declaration>
@@ -556,7 +689,7 @@
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{4cc74316-443e-4f9b-aa42-c2d8e8d35137}</uid>
+                    <uid>{925e8402-499d-4f25-a0be-1eeb60350f2d}</uid>
                     <visibility>1</visibility>
                     <type>2</type>
                     <properties>4</properties>
@@ -590,7 +723,7 @@
                  <qlist>
                   <item>
                    <MClassMember>
-                    <uid>{72b6c1b1-dedc-4606-8bc0-01c1aa1bd860}</uid>
+                    <uid>{1d3f1bf2-340e-4057-915f-da92b9b405aa}</uid>
                     <visibility>1</visibility>
                     <type>2</type>
                     <declaration>explicit PinDialog(QWidget*, const QString&amp; title, const QString&amp; pin)</declaration>
@@ -598,7 +731,7 @@
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{58be23d4-8b27-48eb-a16a-5d08547f70f2}</uid>
+                    <uid>{59ca3815-96e8-465b-8371-ee533d4734dc}</uid>
                     <visibility>1</visibility>
                     <type>2</type>
                     <declaration>void initializeComponent()</declaration>
@@ -606,7 +739,7 @@
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{17565f95-9ac3-47f5-8a7b-a3facedcea1b}</uid>
+                    <uid>{8a6249d7-c204-413d-a3c7-b1e8d29bb18c}</uid>
                     <visibility>3</visibility>
                     <type>1</type>
                     <declaration>QScopedPointer&lt;Ui::PinDialog&gt; ui</declaration>
