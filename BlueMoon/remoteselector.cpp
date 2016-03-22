@@ -491,12 +491,17 @@ void RemoteSelector::bluetoothOn()
 {
     this->showNormal();
     localDevice_.data()->setHostMode(QBluetoothLocalDevice::HostDiscoverable);
+    ui->checkBox_BtOnOff->setChecked(true);
+    ui->checkBox_BtVisible->setEnabled(true);
 
 }
 
 void RemoteSelector::bluetoothOff()
 {
     localDevice_.data()->setHostMode(QBluetoothLocalDevice::HostPoweredOff);
+    ui->checkBox_BtOnOff->setChecked(false);
+    ui->checkBox_BtVisible->setChecked(false);
+    ui->checkBox_BtVisible->setEnabled(false);
 }
 void RemoteSelector::visibilityOnOff()
 {
