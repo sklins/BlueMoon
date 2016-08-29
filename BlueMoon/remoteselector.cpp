@@ -57,7 +57,7 @@ RemoteSelector::RemoteSelector(QWidget* parent)
     discoveryAgent_.reset(new QBluetoothServiceDiscoveryAgent(adapterAddress));
 
     connect(discoveryAgent_.data(), &QBluetoothServiceDiscoveryAgent::serviceDiscovered, this, &RemoteSelector::serviceDiscovered);
-    connect(discoveryAgent_.data(), &QBluetoothServiceDiscoveryAgent::serviceDiscovered, this, &RemoteSelector::discoveryFinished);
+    connect(discoveryAgent_.data(), &QBluetoothServiceDiscoveryAgent::finished, this, &RemoteSelector::discoveryFinished);
     connect(discoveryAgent_.data(), &QBluetoothServiceDiscoveryAgent::canceled, this, &RemoteSelector::discoveryFinished);
 
     ui->remoteDevices->setColumnWidth(3, 75);
